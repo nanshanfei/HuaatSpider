@@ -21,7 +21,7 @@ def time_deco(func):
         func(*args, **kwargs)
         end_time = time.time()
         delta_time = end_time - start_time
-        print '%s costs time : %f s' % (func.__name__, delta_time)
+        print('%s costs time : %f s' % (func.__name__, delta_time))
     return wrapper
 
 class WinxinSpider():
@@ -59,7 +59,7 @@ class WinxinSpider():
                 data = codecs.open(fpath, 'r', 'gbk').readlines()
                 if '字段1' in data[0]:
                     self.file_data.extend(data[1:])
-            except UnicodeDecodeError,e:
+            except:
                 logging.error('文件{}为非gbk编码.'.format(fpath))
                 continue
             count += 1
@@ -115,14 +115,14 @@ class WinxinSpider():
             with codecs.open(self.outfile, 'w', encoding='utf-8') as f:
                 for line in self.output_list:
                     f.write(line + '\n')
-        except Exception,e:
-            logging.error(e)
+        except:
+            logging.error('error')
 
 
 if __name__ == '__main__':
 
     infile = data_path
-    outfile = '/Users/apple/Downloads/data_20170927.txt'
+    outfile = 'F:/data_20170928.txt'
     spider = WinxinSpider(infile=data_path, outfile=outfile)
     spider.regexp_parse()
     spider.save_file()
